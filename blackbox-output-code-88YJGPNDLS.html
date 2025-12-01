@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoDealer - Used Vehicles Marketplace</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- OpenGraph for Social Shares (as per Slide 11) -->
+    <meta property="og:title" content="Find Your Perfect Pre-Owned Vehicle - Book Now!">
+    <meta property="og:description" content="Certified used cars, bikes, and commercial vehicles. Book test drives easily.">
+    <meta property="og:image" content="https://source.unsplash.com/featured/?car-dealership">
+</head>
+<body class="bg-navy text-white">
+    <!-- Navigation (Mobile-First Collapsible) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-navy">
+        <div class="container">
+            <a class="navbar-brand" href="#home">AutoDealer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#categories">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#admin">Admin</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page (Slide 3) -->
+    <section id="home" class="hero-section py-5">
+        <div class="container text-center">
+            <h1 class="display-4">Find Your Perfect Pre-Owned Vehicle – Book a Test Drive Today!</h1>
+            <div class="search-bar my-4">
+                <input type="text" class="form-control mb-2" placeholder="Search by Make/Model">
+                <button class="btn btn-orange">Search</button>
+            </div>
+            <div class="categories row">
+                <div class="col-4"><a href="#categories" class="category-link"><img src="https://source.unsplash.com/featured/?car" alt="Cars" class="img-fluid"><p>Cars</p></a></div>
+                <div class="col-4"><a href="#categories" class="category-link"><img src="https://source.unsplash.com/featured/?motorcycle" alt="Bikes" class="img-fluid"><p>Bikes</p></a></div>
+                <div class="col-4"><a href="#categories" class="category-link"><img src="https://source.unsplash.com/featured/?truck" alt="3W/Commercial" class="img-fluid"><p>3W/Commercial</p></a></div>
+            </div>
+            <div class="featured-vehicles mt-5">
+                <h2>Featured Vehicles</h2>
+                <div class="row">
+                    <div class="col-md-3 mb-3"><div class="card bg-white text-dark"><img src="https://source.unsplash.com/featured/?red-car" class="card-img-top" alt="Vehicle"><div class="card-body"><h5>2020 Honda Civic</h5><p>₹5L</p><button class="btn btn-orange" onclick="showVehicleDetail()">Book Now</button></div></div></div>
+                    <!-- Add 2-3 more similar cards -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Page (Slide 4) -->
+    <section id="categories" class="py-5 d-none">
+        <div class="container">
+            <h2>Cars</h2>
+            <div class="filters mb-4">
+                <select class="form-select mb-2"><option>Make</option></select>
+                <input type="range" class="form-range" min="2010" max="2023" id="yearFilter">
+                <button class="btn btn-orange" onclick="applyFilters()">Apply Filters</button>
+            </div>
+            <div class="vehicle-grid row">
+                <div class="col-md-4 mb-3"><div class="card bg-white text-dark"><img src="https://source.unsplash.com/featured/?sedan" class="card-img-top" alt="Vehicle"><div class="card-body"><h5>2020 Honda Civic</h5><p>50k KM, Petrol</p><button class="btn btn-orange" onclick="showVehicleDetail()">View Details</button></div></div></div>
+                <!-- Add more cards -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Vehicle Detail Page (Slide 5) -->
+    <section id="vehicle-detail" class="py-5 d-none">
+        <div class="container">
+            <div class="gallery mb-4"><img src="https://source.unsplash.com/featured/?car-interior" class="img-fluid" alt="Vehicle Gallery"></div>
+            <div class="specs card bg-white text-dark p-3 mb-4">
+                <h3>Key Specs</h3>
+                <p>Make: Honda, Model: Civic, Year: 2020, KM: 50k, Engine: 1.8L, Transmission: Manual, Fuel: Petrol, Color: Red</p>
+                <h4>Condition</h4>
+                <ul><li>Engine: Good</li><li>Body: Minor Scratches</li></ul>
+            </div>
+            <div class="price-section mb-4">
+                <h3>₹5L</h3>
+                <div class="emi-calculator">
+                    <input type="number" placeholder="Down Payment %" class="form-control mb-2">
+                    <input type="number" placeholder="Tenure (months)" class="form-control mb-2">
+                    <button class="btn btn-orange" onclick="calculateEMI()">Calculate EMI</button>
+                    <p id="emi-result"></p>
+                </div>
+            </div>
+            <button class="btn btn-orange me-2" onclick="showBookingModal()">Book Now</button>
+            <button class="btn btn-secondary">Reserve by Call</button>
+            <div class="dealer-card card bg-white text-dark p-3 mt-4">
+                <h4>Dealer: ABC Motors</h4>
+                <p>Location: Mumbai, Rating: 4.5⭐</p>
+                <button class="btn btn-orange">Contact</button>
+            </div>
+            <div class="reviews mt-4"><h4>Reviews</h4><p>Great vehicle! - 5⭐</p></div>
+        </div>
+    </section>
+
+    <!-- Booking Modal (Slide 6) -->
+    <div class="modal fade" id="bookingModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content bg-navy text-white">
+                <div class="modal-header"><h5>Book Vehicle</h5></div>
+                <div class="modal-body">
+                    <select class="form-select mb-2"><option>Test Drive</option><option>Hold</option><option>Inspection</option></select>
+                    <input type="datetime-local" class="form-control mb-2">
+                    <select class="form-select mb-2"><option>Pickup at Dealer</option><option>Buyer Location</option></select>
+                    <input type="tel" placeholder="Phone" class="form-control mb-2">
+                    <button class="btn btn-orange" onclick="validateOTP()">Send OTP</button>
+                    <input type="text" placeholder="Enter OTP" class="form-control mb-2" id="otpInput">
+                </div>
+                <div class="modal-footer"><button class="btn btn-orange" onclick="confirmBooking()">Confirm</button></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Page (Slide 6) -->
+    <section id="confirmation" class="py-5 d-none">
+        <div class="container text-center">
+            <h2>Booking Confirmed!</h2>
+            <p>Dealer will contact you soon. Check your email/SMS.</p>
+            <!-- Simulate Notification: Email/SMS as per Slide 6 -->
+            <p><strong>Sample Email:</strong> Subject: Your Vehicle Booking Confirmed! Body: Dear John, Your Test Drive for 2020 Honda Civic is confirmed for 2023-10-15 at Dealer. Contact: +91-9876543210.</p>
+            <p><strong>Sample SMS:</strong> New Booking: Test Drive for Honda Civic by John Doe on 2023-10-15. Contact: +91-9876543210.</p>
+        </div>
+    </section>
+
+    <!-- Admin Dashboard (Slide 7) -->
+    <section id="admin" class="py-5 d-none">
+        <div class="container">
+            <h2>Admin Dashboard</h2>
+            <div class="tabs">
+                <button class="btn btn-orange me-2" onclick="showInventory()">Inventory</button>
+                <button class="btn btn-orange" onclick="showBookings()">Bookings</button>
+            </div>
+            <div id="inventory-list" class="mt-4 d-none">
+                <table class="table table-dark"><thead><tr><th>Vehicle</th><th>Status</th></tr></thead><tbody><tr><td>2020 Honda Civic</td><td>In Stock</td></tr></tbody></table>
+                <button class="btn btn-orange" onclick="showAddForm()">Add Vehicle</button>
+            </div>
+            <div id="bookings-list" class="mt-4 d-none">
+                <p>Recent Bookings: Test Drive for Civic - Accept/Decline</p>
+                <!-- Simulate Webhook: JSON as per Slide 6 -->
+                <pre>{"event":"new_booking","booking_id":"BK12345","type":"test_drive","vehicle":"2020 Honda Civic","buyer_name":"John Doe","buyer_phone":"+91-9876543210","date":"2023-10-15T10:00:00Z","location":"dealer","dealer_id":"DL001"}</pre>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
